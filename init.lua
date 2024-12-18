@@ -611,7 +611,16 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
+        clangd = {
+          cmd = { "clangd", "--compile-commands-dir=./build" }, -- Adjust the path to your build directory
+          settings = {
+            clangd = {
+              pathMappings = { -- Example for mapping project paths
+                ["/home/gerlesh/igraph/include"] = "./include",
+              },
+            },
+          },
+        },
         -- gopls = {},
         pyright = {},
         -- rust_analyzer = {},
